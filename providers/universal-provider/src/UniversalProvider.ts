@@ -232,17 +232,22 @@ export class UniversalProvider implements IUniversalProvider {
   private async checkStorage() {
     this.namespaces = await this.getFromStore("namespaces");
     this.optionalNamespaces = (await this.getFromStore("optionalNamespaces")) || {};
-    if (this.client.session.length) {
-      const lastKeyIndex = this.client.session.keys.length - 1;
-      this.session = this.client.session.get(this.client.session.keys[lastKeyIndex]);
-      this.createProviders();
-    }
   }
 
   private async initialize() {
     this.logger.trace(`Initialized`);
     await this.createClient();
     await this.checkStorage();
+
+    if (this.providerOpts.session) {
+      this.session = this.providerOpts.session;
+      this.createProviders();
+    } else if (this.client.session.length) {
+      const lastKeyIndex = this.client.session.keys.length - 1;
+      this.session = this.client.session.get(this.client.session.keys[lastKeyIndex]);
+      this.createProviders();
+    }
+
     this.registerEventListeners();
   }
 

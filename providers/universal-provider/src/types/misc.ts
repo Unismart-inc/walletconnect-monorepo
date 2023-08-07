@@ -1,5 +1,5 @@
 import SignClient from "@walletconnect/sign-client";
-import { SignClientTypes, ProposalTypes } from "@walletconnect/types";
+import { SignClientTypes, ProposalTypes, SessionTypes } from "@walletconnect/types";
 import { JsonRpcProvider } from "@walletconnect/jsonrpc-provider";
 import { KeyValueStorageOptions, IKeyValueStorage } from "@walletconnect/keyvaluestorage";
 import { IEvents } from "@walletconnect/events";
@@ -16,6 +16,7 @@ export interface UniversalProviderOpts {
   storage?: IKeyValueStorage;
   name?: string;
   disableProviderPing?: boolean;
+  session?: SessionTypes.Struct;
 }
 
 export type Metadata = SignClientTypes.Metadata;

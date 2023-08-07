@@ -78,7 +78,7 @@ export function mergeRequiredOptionalNamespaces(
  */
 export function normalizeNamespaces(namespaces: NamespaceConfig): NamespaceConfig {
   const normalizedNamespaces: NamespaceConfig = {};
-  if (!isValidObject(namespaces)) return normalizedNamespaces;
+  if (!isValidObject(namespaces || {})) return normalizedNamespaces;
 
   for (const [key, values] of Object.entries(namespaces)) {
     const chains = isCaipNamespace(key) ? [key] : values.chains;
